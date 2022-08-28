@@ -1,13 +1,14 @@
 use std::{error::Error, fs::File, os::unix::prelude::AsRawFd, path::PathBuf, time::Duration};
 
-mod xdg_desktop_portal_openuri;
 use dbus::{
     arg::{OwnedFd, PropMap},
     blocking::Connection,
 };
+
+mod xdg_desktop_portal_openuri;
 use xdg_desktop_portal_openuri::*;
 
-pub fn open(file_path: &PathBuf) -> Result<(), Box<dyn Error>> {
+pub fn open(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let dbus_connection = Connection::new_session()?;
     let xdg_desktop_portal_proxy = dbus_connection.with_proxy(
         "org.freedesktop.portal.Desktop",
@@ -29,7 +30,7 @@ pub fn open(file_path: &PathBuf) -> Result<(), Box<dyn Error>> {
     }
 }
 
-pub fn open_with(file_path: &PathBuf) -> Result<(), Box<dyn Error>> {
+pub fn open_with(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let dbus_connection = Connection::new_session()?;
     let xdg_desktop_portal_proxy = dbus_connection.with_proxy(
         "org.freedesktop.portal.Desktop",
@@ -51,7 +52,7 @@ pub fn open_with(file_path: &PathBuf) -> Result<(), Box<dyn Error>> {
     }
 }
 
-pub fn open_folder(file_path: &PathBuf) -> Result<(), Box<dyn Error>> {
+pub fn open_folder(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let dbus_connection = Connection::new_session()?;
     let xdg_desktop_portal_proxy = dbus_connection.with_proxy(
         "org.freedesktop.portal.Desktop",
@@ -79,17 +80,17 @@ mod tests {
     #[test]
     fn test_open() {
         let file_path = PathBuf::from("src/lib.rs");
-        let _result = open(&file_path).unwrap();
+        let _result = open(file_path).unwrap();
     }
     #[test]
     fn test_open_with() {
         let file_path = PathBuf::from("src/lib.rs");
-        let _result = open_with(&file_path).unwrap();
+        let _result = open_with(file_path).unwrap();
     }
 
     #[test]
     fn test_open_folder() {
         let file_path = PathBuf::from("src/lib.rs");
-        let _result = open_folder(&file_path).unwrap();
+        let _result = open_folder(file_path).unwrap();
     }
 }
