@@ -1,5 +1,3 @@
-use std::path::PathBuf;
-
 #[cfg(target_os = "linux")]
 pub mod lib_linux;
 #[cfg(target_os = "linux")]
@@ -18,6 +16,7 @@ pub use lib_windows::*;
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::path::PathBuf;
 
     #[test]
     fn test_open() {
@@ -40,5 +39,6 @@ mod tests {
     fn test_show_properties() {
         let file_path = PathBuf::from("src/lib.rs");
         let _result = show_properties(file_path).unwrap();
+        std::thread::sleep(std::time::Duration::from_millis(10000));
     }
 }
