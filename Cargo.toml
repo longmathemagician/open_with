@@ -2,9 +2,17 @@
 name = "open_with"
 version = "0.1.0"
 edition = "2021"
+license = "Apache-2.0"
+description = "Provides a multiplatform invocation interface to the native open-with interface for files."
+homepage = "https://github.com/longmathemagician/open_with"
+documentation = "https://docs.rs/open_with/latest/"
+repository = "https://github.com/longmathemagician/open_with"
+keywords = ["open", "open-with", "file"]
+authors = ["Stephen Gibbel <steve@gibbel.us>"]
+readme = "README.md"
 
 [target.'cfg(target_os = "linux")'.dependencies]
-dbus = "0.9.6"
+dbus = "0.9.7"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 osascript = "0.3.0"
