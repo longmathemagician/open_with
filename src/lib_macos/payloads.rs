@@ -13,4 +13,3 @@ if application_selection_result is false then return
 set selected_application to item 1 of application_selection_result
 set selected_application_path to (path to application selected_application)
 tell application \"Finder\" to open selection using selected_application_path";
-

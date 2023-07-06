@@ -1,15 +1,18 @@
 #[cfg(target_os = "linux")]
 pub mod lib_linux;
+
 #[cfg(target_os = "linux")]
 pub use lib_linux::*;
 
 #[cfg(target_os = "macos")]
 pub mod lib_macos;
+
 #[cfg(target_os = "macos")]
 pub use lib_macos::*;
 
 #[cfg(target_os = "windows")]
 pub mod lib_windows;
+
 #[cfg(target_os = "windows")]
 pub use lib_windows::*;
 
@@ -23,6 +26,7 @@ mod tests {
         let file_path = PathBuf::from("src/lib.rs");
         let _result = open(file_path).unwrap();
     }
+
     #[test]
     fn test_open_with() {
         let file_path = PathBuf::from("src/lib.rs");
