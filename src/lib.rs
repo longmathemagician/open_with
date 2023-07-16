@@ -1,20 +1,36 @@
-#[cfg(target_os = "linux")]
-pub mod lib_linux;
+use std::error::Error;
+use std::path::PathBuf;
 
 #[cfg(target_os = "linux")]
-pub use lib_linux::*;
+mod lib_linux;
+#[cfg(target_os = "linux")]
+use lib_linux as backend;
 
 #[cfg(target_os = "macos")]
-pub mod lib_macos;
-
+mod lib_macos;
 #[cfg(target_os = "macos")]
-pub use lib_macos::*;
+use lib_macos as backend;
 
 #[cfg(target_os = "windows")]
-pub mod lib_windows;
-
+mod lib_windows;
 #[cfg(target_os = "windows")]
-pub use lib_windows::*;
+use lib_windows as backend;
+
+pub fn open(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
+    backend::open(file_path)
+}
+
+pub fn open_with(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
+    backend::open_with(file_path)
+}
+
+pub fn show_in_folder(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
+    backend::show_in_folder(file_path)
+}
+
+pub fn show_properties(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
+    backend::show_properties(file_path)
+}
 
 #[cfg(test)]
 mod tests {

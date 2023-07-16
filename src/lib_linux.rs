@@ -14,7 +14,7 @@ pub fn open(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let xdg_desktop_portal_proxy = dbus_connection.with_proxy(
         "org.freedesktop.portal.Desktop",
         "/org/freedesktop/portal/desktop",
-        Duration::from_millis(2000),
+        Duration::from_millis(20),
     );
 
     unsafe {
@@ -36,7 +36,7 @@ pub fn open_with(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let xdg_desktop_portal_proxy = dbus_connection.with_proxy(
         "org.freedesktop.portal.Desktop",
         "/org/freedesktop/portal/desktop",
-        Duration::from_millis(2000),
+        Duration::from_millis(20),
     );
 
     unsafe {
@@ -58,7 +58,7 @@ pub fn show_in_folder(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let xdg_desktop_portal_proxy = dbus_connection.with_proxy(
         "org.freedesktop.portal.Desktop",
         "/org/freedesktop/portal/desktop",
-        Duration::from_millis(2000),
+        Duration::from_millis(20),
     );
 
     unsafe {
@@ -79,10 +79,12 @@ pub fn show_properties(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     let file_manager_proxy = dbus_connection.with_proxy(
         "org.freedesktop.FileManager1",
         "/org/freedesktop/FileManager1",
-        Duration::from_millis(2000),
+        Duration::from_millis(200),
     );
 
     let mut file_path: String = file_path
+        .canonicalize()
+        .map_err(|_e| "Failed to convert path to string")?
         .into_os_string()
         .into_string()
         .map_err(|_e| "Failed to convert path to string")?;
