@@ -1,6 +1,6 @@
 [package]
 name = "open_with"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "Apache-2.0"
 description = "Provides a multiplatform invocation interface to the native open-with interface for files."

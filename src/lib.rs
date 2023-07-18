@@ -16,18 +16,54 @@ mod lib_windows;
 #[cfg(target_os = "windows")]
 use lib_windows as backend;
 
+/// Opens the file at the given path using the default application.
+///
+/// # Arguments
+///
+/// * `file_path` - A `PathBuf` that holds the path to the file to be opened.
+///
+/// # Errors
+///
+/// Returns an error if the file cannot be opened.
 pub fn open(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     backend::open(file_path)
 }
 
+/// Invokes the platform's "Open With" dialog for the file at the provided path.
+///
+/// # Arguments
+///
+/// * `file_path` - A `PathBuf` that holds the path to the file to be opened.
+///
+/// # Errors
+///
+/// Returns an error if the file cannot be opened.
 pub fn open_with(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     backend::open_with(file_path)
 }
 
+/// Shows the folder containing the file at the given path. Where supported, the file is selected.
+///
+/// # Arguments
+///
+/// * `file_path` - A `PathBuf` that holds the path to the file.
+///
+/// # Errors
+///
+/// Returns an error if the folder cannot be shown.
 pub fn show_in_folder(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     backend::show_in_folder(file_path)
 }
 
+/// Uses the default file manager to show properties of the file at the given path.
+///
+/// # Arguments
+///
+/// * `file_path` - A `PathBuf` that holds the path to the file.
+///
+/// # Errors
+///
+/// Returns an error if the properties cannot be shown.
 pub fn show_properties(file_path: PathBuf) -> Result<(), Box<dyn Error>> {
     backend::show_properties(file_path)
 }
